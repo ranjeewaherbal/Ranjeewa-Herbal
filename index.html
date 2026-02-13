@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranjeewa Herbal | Premium Ayurveda Products & Treatments</title>
+    <meta name="description" content="Traditional Sri Lankan Ayurveda treatments and premium herbal oils including Varicose, Hair, and Migraine oils. Experience holistic healing at Ranjeewa Herbal.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#047857', // Emerald 700
+                        secondary: '#d97706', // Amber 600
+                        accent: '#f59e0b', // Amber 500
+                        dark: '#1c1917', // Stone 900
+                        light: '#fafaf9', // Stone 50
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .hero-pattern {
+            background-color: #047857;
+            background-image: url("https://www.transparenttextures.com/patterns/leaf.png");
+        }
+        .smooth-scroll { scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-light text-dark smooth-scroll">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <!-- Icon Placeholder -->
+                        <i data-lucide="leaf" class="h-8 w-8 text-primary"></i>
+                        <span class="text-2xl font-bold text-primary tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-primary hover:text-secondary font-medium transition">Home</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary font-medium transition">Products</a>
+                    <a href="services.html" class="text-gray-700 hover:text-primary font-medium transition">Treatments</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition">About Us</a>
+                    <a href="contact.html" class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-green-50">Home</a>
+                <a href="products.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Products</a>
+                <a href="services.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Treatments</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About Us</a>
+                <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-10"></div>
+        <div class="absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-emerald-50 to-transparent hidden lg:block"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
+                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full border border-emerald-100 bg-emerald-50 text-primary text-sm font-semibold mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
+                        Traditional Sri Lankan Ayurveda
+                    </div>
+                    <h1 class="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
+                        <span class="block">Holistic Healing with</span>
+                        <span class="block text-primary">Nature's Wisdom</span>
+                    </h1>
+                    <p class="mt-4 text-lg text-gray-500 sm:mt-5 sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                        Discover the power of authentic Ayurvedic oils and treatments. From varicose relief to rejuvenating Shirodhara, we bring ancient healing to your modern life.
+                    </p>
+                    <div class="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0 flex flex-col sm:flex-row gap-4">
+                        <a href="products.html" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-emerald-800 md:py-4 md:text-lg md:px-10 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                            Shop Oils
+                        </a>
+                        <a href="services.html" class="inline-flex items-center justify-center px-8 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 shadow-sm hover:shadow-md transition">
+                            Book Treatment
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
+                    <div class="relative mx-auto w-full rounded-lg shadow-2xl lg:max-w-md overflow-hidden transform rotate-2 hover:rotate-0 transition duration-500">
+                        <img class="w-full" src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Ayurveda Oils">
+                        <!-- Fallback/Placeholder Image -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                            <div class="p-6">
+                                <p class="text-white font-medium text-lg">Pure Herbal Essence</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center mb-12">
+                <h2 class="text-base text-primary font-semibold tracking-wide uppercase">Why Choose Us</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Authentic Sri Lankan Ayurveda
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+                    We combine traditional knowledge with modern manufacturing standards to deliver the best care.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 rounded-2xl p-8 transition hover:shadow-lg hover:scale-105 duration-300 border border-gray-100">
+                    <div class="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                        <i data-lucide="droplet" class="h-6 w-6 text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Premium Herbal Oils</h3>
+                    <p class="text-gray-600">Specialized oils for Varicose veins, Hair growth, and Migraine relief, manufactured with care.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 rounded-2xl p-8 transition hover:shadow-lg hover:scale-105 duration-300 border border-gray-100">
+                    <div class="h-12 w-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-6">
+                        <i data-lucide="heart-pulse" class="h-6 w-6 text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Expert Treatments</h3>
+                    <p class="text-gray-600">Sarwanga Ayurveda treatments including Shirodhara and Steam baths at our dedicated center.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 rounded-2xl p-8 transition hover:shadow-lg hover:scale-105 duration-300 border border-gray-100">
+                    <div class="h-12 w-12 rounded-xl bg-amber-500/10 flex items-center justify-center mb-6">
+                        <i data-lucide="sun" class="h-6 w-6 text-amber-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Natural Healing</h3>
+                    <p class="text-gray-600">100% natural ingredients sourced locally to ensure purity and effectiveness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Products Preview -->
+    <div class="bg-emerald-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-3xl font-extrabold text-gray-900">Our Signature Products</h2>
+                    <p class="mt-2 text-gray-600">Healing oils crafted for specific ailments.</p>
+                </div>
+                <a href="products.html" class="hidden md:flex items-center text-primary font-semibold hover:text-emerald-800">
+                    View all products <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product Card 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <div class="h-48 bg-gray-200 relative group overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Varicose Oil" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900">Varicose Relief Oil</h3>
+                        <p class="text-sm text-gray-500 mb-4">Special formula for vein health</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">LKR 1,500</span>
+                            <button class="text-sm border border-primary text-primary px-4 py-1.5 rounded-full hover:bg-primary hover:text-white transition">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <div class="h-48 bg-gray-200 relative group overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1528702748617-c64d49f918af?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Hair Oil" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <span class="absolute top-4 right-4 bg-secondary text-white text-xs font-bold px-2 py-1 rounded">Best Seller</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900">Herbal Hair Oil</h3>
+                        <p class="text-sm text-gray-500 mb-4">Promotes growth & prevents fall</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">LKR 1,200</span>
+                            <button class="text-sm border border-primary text-primary px-4 py-1.5 rounded-full hover:bg-primary hover:text-white transition">Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                    <div class="h-48 bg-gray-200 relative group overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Migraine Oil" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-900">Migraine Relief Oil</h3>
+                        <p class="text-sm text-gray-500 mb-4">Instant relief for headaches</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-primary font-bold">LKR 950</span>
+                            <button class="text-sm border border-primary text-primary px-4 py-1.5 rounded-full hover:bg-primary hover:text-white transition">Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="products.html" class="inline-flex items-center text-primary font-semibold hover:text-emerald-800">
+                    View all products <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CTA Section -->
+    <div class="bg-primary relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/leaf.png');"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative z-10 text-center">
+            <h2 class="text-3xl font-extrabold text-white sm:text-4xl mb-6">
+                Ready to Experience Holistic Wellness?
+            </h2>
+            <p class="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">
+                Visit our treatment center or order our premium herbal oils today.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="contact.html" class="inline-block bg-white text-primary font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition shadow-lg">
+                    Contact Us Today
+                </a>
+                <a href="tel:+94123456789" class="inline-flex items-center justify-center bg-emerald-800 text-white font-bold py-3 px-8 rounded-full hover:bg-emerald-900 transition shadow-lg border border-emerald-600">
+                    <i data-lucide="phone" class="h-4 w-4 mr-2"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <i data-lucide="leaf" class="h-6 w-6 text-primary"></i>
+                        <span class="text-xl font-bold tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Dedicated to preserving the ancient wisdom of Sri Lankan Ayurveda while delivering premium quality natural products and treatments.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-primary transition">Home</a></li>
+                        <li><a href="products.html" class="hover:text-primary transition">Our Products</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Treatments</a></li>
+                        <li><a href="about.html" class="hover:text-primary transition">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Treatments</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="services.html" class="hover:text-primary transition">Shirodhara</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Steam Bath</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Varicose Treatment</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Sarwanga Ayurveda</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="h-5 w-5 mr-2 text-primary flex-shrink-0 mt-0.5"></i>
+                            <span>123 Ayurveda Lane, Colombo, Sri Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="h-5 w-5 mr-2 text-primary flex-shrink-0"></i>
+                            <span>+94 11 234 5678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="h-5 w-5 mr-2 text-primary flex-shrink-0"></i>
+                            <span>info@ranjeewaherbal.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2024 Ranjeewa Herbal. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition"><i data-lucide="facebook" class="h-4 w-4"></i></a>
+                    <a href="#" class="hover:text-white transition"><i data-lucide="instagram" class="h-4 w-4"></i></a>
+                    <a href="#" class="hover:text-white transition"><i data-lucide="twitter" class="h-4 w-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>

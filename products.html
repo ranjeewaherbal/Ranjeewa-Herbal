@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Products | Ranjeewa Herbal</title>
+    <meta name="description"
+        content="Explore our range of premium Ayurvedic herbal oils, including Varicose relief, Hair growth, and Migraine solutions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#047857',
+                        secondary: '#d97706',
+                        accent: '#f59e0b',
+                        dark: '#1c1917',
+                        light: '#fafaf9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-light text-dark font-sans">
+
+    <!-- Navigation (Same as Home) -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-8 w-8 text-primary"></i>
+                        <span class="text-2xl font-bold text-primary tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium transition">Home</a>
+                    <a href="products.html"
+                        class="text-primary hover:text-secondary font-medium transition">Products</a>
+                    <a href="services.html"
+                        class="text-gray-700 hover:text-primary font-medium transition">Treatments</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition">About Us</a>
+                    <a href="contact.html"
+                        class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Home</a>
+                <a href="products.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-green-50">Products</a>
+                <a href="services.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Treatments</a>
+                <a href="about.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About
+                    Us</a>
+                <a href="contact.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-emerald-800 pt-32 pb-16 text-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]">
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">Our Herbal Products</h1>
+            <p class="text-emerald-100 text-lg max-w-2xl mx-auto">Handcrafted with pure, natural ingredients to bring
+                you the best of Ayurveda.</p>
+        </div>
+    </header>
+
+    <!-- Products Grid -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- Filters (Visual only for now) -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="px-6 py-2 rounded-full bg-primary text-white font-medium shadow-md">All Products</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium transition">Oils</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium transition">Balms</button>
+                <button
+                    class="px-6 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium transition">Supplements</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                <!-- Product 1: Varicose Oil -->
+                <div
+                    class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div class="relative h-64 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Varicose Oil"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div
+                            class="absolute top-4 left-4 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                            Best Seller</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary transition">Varicose
+                                Relief Oil</h3>
+                            <span class="text-lg font-bold text-primary">LKR 1,500</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                            A specialized Ayurvedic formula designed to improve blood circulation and reduce the
+                            appearance and pain of varicose veins. Made with a blend of potent herbs.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-500 mb-6">
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> 100% Natural</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Fast Absorbing</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> No Side Effects</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Daily Use</span>
+                        </div>
+                        <button
+                            class="w-full py-3 bg-gray-50 text-gray-800 font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition duration-300 flex justify-center items-center">
+                            Order Now <i data-lucide="shopping-bag" class="h-4 w-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 2: Hair Oil -->
+                <div
+                    class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div class="relative h-64 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1528702748617-c64d49f918af?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Hair Oil"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary transition">Premium Hair
+                                Oil</h3>
+                            <span class="text-lg font-bold text-primary">LKR 1,200</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                            Enriched with Vitamin E and traditional herbs to nourish the scalp, prevent hair fall, and
+                            promote thick, lustrous hair growth.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-500 mb-6">
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Hair Growth</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Anti-Dandruff</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Shine Boost</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Heat Protect</span>
+                        </div>
+                        <button
+                            class="w-full py-3 bg-gray-50 text-gray-800 font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition duration-300 flex justify-center items-center">
+                            Order Now <i data-lucide="shopping-bag" class="h-4 w-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 3: Migraine Oil -->
+                <div
+                    class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div class="relative h-64 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Migraine Oil"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary transition">Migraine
+                                Relief Oil</h3>
+                            <span class="text-lg font-bold text-primary">LKR 950</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                            A calming blend of essential oils and herbs that provides rapid relief from migraine
+                            headaches, tension, and stress.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-500 mb-6">
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Instant Relief</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Cooling Effect</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Aromatherapy</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Portable</span>
+                        </div>
+                        <button
+                            class="w-full py-3 bg-gray-50 text-gray-800 font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition duration-300 flex justify-center items-center">
+                            Order Now <i data-lucide="shopping-bag" class="h-4 w-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product 4: Joint Pain Oil (Extra) -->
+                <div
+                    class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 overflow-hidden">
+                    <div class="relative h-64 bg-gray-200 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Joint Pain Oil"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary transition">Classic
+                                Joint Pain Oil</h3>
+                            <span class="text-lg font-bold text-primary">LKR 1,100</span>
+                        </div>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                            Effective relief for arthritis, joint pain, and muscle stiffness. Formulated with warming
+                            herbs to improve mobility.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-gray-500 mb-6">
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Deep Penetration</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Warming Effect</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Long Lasting</span>
+                            <span class="flex items-center"><i data-lucide="check"
+                                    class="h-3 w-3 mr-1 text-green-500"></i> Herb Infused</span>
+                        </div>
+                        <button
+                            class="w-full py-3 bg-gray-50 text-gray-800 font-semibold rounded-xl group-hover:bg-primary group-hover:text-white transition duration-300 flex justify-center items-center">
+                            Order Now <i data-lucide="shopping-bag" class="h-4 w-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-6 w-6 text-primary"></i>
+                        <span class="text-xl font-bold tracking-tight">Ranjeewa Herbal</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">© 2024. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+                    <a href="products.html" class="text-gray-400 hover:text-white transition">Products</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>

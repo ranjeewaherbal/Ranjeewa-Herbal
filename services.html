@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treatments & Services | Ranjeewa Herbal</title>
+    <meta name="description"
+        content="Authentic Sri Lankan Ayurveda treatments including Shirodhara, Steam Bath, Varicose treatment and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#047857',
+                        secondary: '#d97706',
+                        accent: '#f59e0b',
+                        dark: '#1c1917',
+                        light: '#fafaf9',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-light text-dark font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-8 w-8 text-primary"></i>
+                        <span class="text-2xl font-bold text-primary tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium transition">Home</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary font-medium transition">Products</a>
+                    <a href="services.html"
+                        class="text-primary hover:text-secondary font-medium transition">Treatments</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition">About Us</a>
+                    <a href="contact.html"
+                        class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Home</a>
+                <a href="products.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Products</a>
+                <a href="services.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-green-50">Treatments</a>
+                <a href="about.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About
+                    Us</a>
+                <a href="contact.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-secondary/90 pt-32 pb-16 text-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]">
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">Ayurveda Treatment Center</h1>
+            <p class="text-emerald-50 text-lg max-w-2xl mx-auto">Rejuvenate your body and mind with our authentic
+                healing therapies.</p>
+        </div>
+    </header>
+
+    <!-- Services List -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+
+            <!-- Service 1: Shirodhara -->
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                            alt="Shirodhara" class="w-full h-80 object-cover">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-3xl font-serif font-bold text-gray-900 mb-4">Shirodhara</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        A unique ancient therapy where warm herbal oil is gently poured in a continuous stream over the
+                        forehead. This deeply relaxing treatment synchronizes brain waves and profoundly coordinates and
+                        calms the mind, body, and spirit.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Relieves stress and anxiety</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Improves sleep quality</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Reduces headaches</li>
+                    </ul>
+                    <a href="contact.html"
+                        class="inline-flex items-center font-semibold text-primary hover:text-emerald-800 transition">
+                        Book Appointment <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 2: Steam Bath & Steam Box (Reversed Layout) -->
+            <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-2xl transform -rotate-2 hover:rotate-0 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                            alt="Steam Bath" class="w-full h-80 object-cover">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-3xl font-serif font-bold text-gray-900 mb-4">Herbal Steam Box</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Experience our traditional wooden steam box treatment. The body is enclosed in a wooden chamber
+                        filled with medicinal herbal steam, helping to open pores, remove toxins, and relieve muscle
+                        stiffness.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Detoxing effect</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Relieves muscle pain</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Improves skin tone</li>
+                    </ul>
+                    <a href="contact.html"
+                        class="inline-flex items-center font-semibold text-primary hover:text-emerald-800 transition">
+                        Book Appointment <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 3: Varicose Treatment -->
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                            alt="Varicose Treatment" class="w-full h-80 object-cover">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-3xl font-serif font-bold text-gray-900 mb-4">Varicose Vein Treatment</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        A specialized non-surgical approach using herbal applications and bandages to treat varicose
+                        veins. Our method focuses on strengthening the vein walls and improving blood flow.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Non-invasive</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Reduces swelling</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Pain relief</li>
+                    </ul>
+                    <a href="contact.html"
+                        class="inline-flex items-center font-semibold text-primary hover:text-emerald-800 transition">
+                        Book Appointment <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Service 4: Sarwanga -->
+            <div class="flex flex-col md:flex-row-reverse items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-2xl transform -rotate-2 hover:rotate-0 transition duration-500">
+                        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
+                            alt="Sarwanga" class="w-full h-80 object-cover">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-3xl font-serif font-bold text-gray-900 mb-4">Sarwanga Abhyanga</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6">
+                        Full body oil application massage. This traditional therapy uses warm medicated oils specific to
+                        your constitution (Dosha) to balance the body's energies.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Full body relaxation</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Improves circulation</li>
+                        <li class="flex items-center text-gray-700"><i data-lucide="check-circle"
+                                class="h-5 w-5 text-primary mr-3"></i> Rejuvenates skin</li>
+                    </ul>
+                    <a href="contact.html"
+                        class="inline-flex items-center font-semibold text-primary hover:text-emerald-800 transition">
+                        Book Appointment <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer same as products -->
+    <footer class="bg-dark text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-6 w-6 text-primary"></i>
+                        <span class="text-xl font-bold tracking-tight">Ranjeewa Herbal</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">© 2024. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+                    <a href="products.html" class="text-gray-400 hover:text-white transition">Products</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
