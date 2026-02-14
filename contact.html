@@ -88,42 +88,51 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <!-- Contact Form -->
             <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-                <form action="https://formspree.io/f/xqedqpog">
-                    method="POST"
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                        <input type="text" id="name" name="name"
-                            class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900"
-                            placeholder="Your Name">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                        <input type="email" id="email" name="email"
-                            class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900"
-                            placeholder="you@example.com">
-                    </div>
-                    <div>
-                        <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
-                        <select id="subject" name="subject"
-                            class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900">
-                            <option>Product Inquiry</option>
-                            <option>Treatment Booking</option>
-                            <option>General Support</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-                        <textarea id="message" name="message" rows="4"
-                            class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900"
-                            placeholder="How can we help you?"></textarea>
-                    </div>
-                    <button type="submit"
-                        class="w-full flex justify-center py-4 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                        Send Message
-                    </button>
-                </form>
-            </div>
+    <form action="https://formspree.io/f/xqedqpog" method="POST" class="space-y-6">
+        <!-- Name -->
+        <div>
+            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+            <input type="text" id="name" name="name"
+                class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900"
+                placeholder="Your Name" required>
+        </div>
 
+        <!-- Email -->
+        <div>
+            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+            <input type="email" id="email" name="email"
+                class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900"
+                placeholder="you@example.com" required>
+        </div>
+
+        <!-- Subject -->
+        <div>
+            <label for="subject" class="block text-sm font-medium text-gray-700">Subject</label>
+            <select id="subject" name="subject"
+                class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900">
+                <option>Product Inquiry</option>
+                <option>Treatment Booking</option>
+                <option>General Support</option>
+            </select>
+        </div>
+
+        <!-- Message -->
+        <div>
+            <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+            <textarea id="message" name="message" rows="4"
+                class="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 shadow-sm focus:border-primary focus:ring-primary border text-gray-900"
+                placeholder="Write your message here..." required></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div>
+            <button type="submit"
+                class="w-full bg-primary text-white font-medium py-3 px-6 rounded-lg shadow hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                Send Message
+            </button>
+        </div>
+    </form>
+</div>
             <!-- Contact Info -->
             <div class="space-y-8 flex flex-col justify-center">
                 <div class="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
@@ -210,6 +219,7 @@
 
 
 </html>
+
 
 
 
