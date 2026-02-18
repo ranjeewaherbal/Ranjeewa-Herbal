@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Ranjeewa Herbal</title>
+    <meta name="description"
+        content="Review your selected Ayurveda products and proceed to secure checkout. Bank deposit and Cash on Delivery available.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#047857', // Emerald 700
+                        secondary: '#d97706', // Amber 600
+                        accent: '#f59e0b', // Amber 500
+                        dark: '#1c1917', // Stone 900
+                        light: '#fafaf9', // Stone 50
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #047857;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #065f46;
+        }
+    </style>
+</head>
+
+<body class="bg-light text-dark flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-8 w-8 text-primary"></i>
+                        <span class="text-2xl font-bold text-primary tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium transition">Home</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary font-medium transition">Products</a>
+                    <a href="services.html"
+                        class="text-gray-700 hover:text-primary font-medium transition">Treatments</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition">About Us</a>
+                    <a href="contact.html"
+                        class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Home</a>
+                <a href="products.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Products</a>
+                <a href="services.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Treatments</a>
+                <a href="about.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About
+                    Us</a>
+                <a href="contact.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="bg-emerald-800 pt-32 pb-12 text-center text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20"
+            style="background-image: url('https://www.transparenttextures.com/patterns/leaf.png');"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">Your Shopping Cart</h1>
+            <p class="text-emerald-100 text-lg">Review your items and complete your purchase.</p>
+        </div>
+    </header>
+
+    <!-- Cart Content -->
+    <main class="flex-grow py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+
+        <!-- Empty Cart Message (Default Hidden) -->
+        <div id="empty-cart-message"
+            class="hidden text-center py-16 bg-white rounded-3xl shadow-sm border border-gray-100">
+            <div class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-emerald-50 mb-6">
+                <i data-lucide="shopping-cart" class="h-10 w-10 text-primary"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
+            <p class="text-gray-500 mb-8 max-w-md mx-auto">Looks like you haven't added any premium herbal oils to your
+                cart yet.</p>
+            <a href="products.html"
+                class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-emerald-800 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                Start Shopping
+            </a>
+        </div>
+
+        <div id="cart-container" class="lg:grid lg:grid-cols-12 lg:gap-12 items-start hidden">
+
+            <!-- Cart Items List -->
+            <div class="lg:col-span-7 xl:col-span-8">
+                <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="p-6 md:p-8" id="cart-items-wrapper">
+                        <!-- Items will be injected here by JS -->
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <a href="products.html"
+                        class="flex items-center text-sm font-medium text-primary hover:text-emerald-800 transition">
+                        <i data-lucide="arrow-left" class="h-4 w-4 mr-2"></i> Continue Shopping
+                    </a>
+                </div>
+            </div>
+
+            <!-- Order Summary & Checkout -->
+            <div class="lg:col-span-5 xl:col-span-4 mt-8 lg:mt-0">
+                <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden sticky top-24">
+                    <div class="p-6 md:p-8 bg-emerald-50/50">
+                        <h2 class="text-lg font-bold text-gray-900 mb-6">Order Summary</h2>
+
+                        <div class="space-y-4">
+                            <div class="flex justify-between text-base text-gray-600">
+                                <p>Subtotal</p>
+                                <p class="font-medium text-gray-900" id="summary-subtotal">LKR 0</p>
+                            </div>
+                            <div class="flex justify-between text-base text-gray-600">
+                                <p>Shipping</p>
+                                <p class="font-medium text-emerald-600">Calculated at checkout</p>
+                            </div>
+                            <div
+                                class="border-t border-gray-200 pt-4 flex justify-between items-center text-lg font-bold text-gray-900">
+                                <p>Total</p>
+                                <p class="text-primary text-xl" id="summary-total">LKR 0</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 md:p-8">
+                        <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-4">Payment Method</h3>
+
+                        <div class="space-y-4 mb-8">
+                            <!-- Bank Deposit Option -->
+                            <label
+                                class="relative flex p-4 border rounded-xl cursor-pointer focus:outline-none transition-all hover:border-primary group"
+                                id="option-bank">
+                                <input type="radio" name="payment-method" value="bank"
+                                    class="h-4 w-4 text-primary border-gray-300 focus:ring-primary mt-1 cursor-pointer"
+                                    onclick="togglePaymentDetails('bank')">
+                                <span class="ml-3 flex-1">
+                                    <span class="block text-sm font-medium text-gray-900">Bank Deposit</span>
+                                    <span class="block text-xs text-gray-500 mt-1">Transfer to our Bank of Ceylon
+                                        account</span>
+                                </span>
+                                <i data-lucide="university" class="h-5 w-5 text-gray-400 group-hover:text-primary"></i>
+                            </label>
+
+                            <!-- Hidden Bank Details -->
+                            <div id="bank-details"
+                                class="hidden p-4 bg-gray-50 rounded-xl border border-gray-200 text-sm text-gray-600 space-y-2 animate-in fade-in slide-in-from-top-2">
+                                <p><span class="font-semibold text-gray-900">Bank:</span> Bank of Ceylon</p>
+                                <p><span class="font-semibold text-gray-900">Branch:</span> Colombo City</p>
+                                <p><span class="font-semibold text-gray-900">Account Name:</span> Ranjeewa Herbal PVT
+                                </p>
+                                <p><span class="font-semibold text-gray-900">Account No:</span> 123-456-7890</p>
+                                <p class="text-xs text-amber-600 mt-2 bg-amber-50 p-2 rounded">Note: Please upload your
+                                    slip or reference number after checkout.</p>
+                            </div>
+
+                            <!-- Cash on Delivery Option -->
+                            <label
+                                class="relative flex p-4 border rounded-xl cursor-pointer focus:outline-none transition-all hover:border-primary group"
+                                id="option-cod">
+                                <input type="radio" name="payment-method" value="cod"
+                                    class="h-4 w-4 text-primary border-gray-300 focus:ring-primary mt-1 cursor-pointer"
+                                    onclick="togglePaymentDetails('cod')" checked>
+                                <span class="ml-3 flex-1">
+                                    <span class="block text-sm font-medium text-gray-900">Cash on Delivery (COD)</span>
+                                    <span class="block text-xs text-gray-500 mt-1">Pay with cash upon arrival</span>
+                                </span>
+                                <i data-lucide="truck" class="h-5 w-5 text-gray-400 group-hover:text-primary"></i>
+                            </label>
+                        </div>
+
+                        <button onclick="processCheckout()"
+                            class="w-full bg-primary text-white text-lg font-bold py-4 rounded-full shadow-lg hover:bg-emerald-800 hover:shadow-xl hover:scale-[1.02] transition-all duration-200 flex items-center justify-center">
+                            Checkout Securely <i data-lucide="lock" class="ml-2 h-5 w-5"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <!-- Background backdrop -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity backdrop-blur-sm"></div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+
+                <div
+                    class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start">
+                            <div
+                                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-emerald-100 sm:mx-0 sm:h-10 sm:w-10">
+                                <i data-lucide="user" class="h-6 w-6 text-primary"></i>
+                            </div>
+                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
+                                <h3 class="text-xl font-semibold leading-6 text-gray-900" id="modal-title">Customer
+                                    Details</h3>
+                                <div class="mt-2 text-sm text-gray-500">
+                                    Please provide your details to complete the order.
+                                </div>
+
+                                <form id="checkout-form" class="mt-4 space-y-4">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-gray-700">Full
+                                            Name</label>
+                                        <input type="text" id="name" name="name" required
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2">
+                                    </div>
+
+                                    <div>
+                                        <label for="address" class="block text-sm font-medium text-gray-700">Delivery
+                                            Address</label>
+                                        <textarea id="address" name="address" rows="3" required
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2"></textarea>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div>
+                                            <label for="city"
+                                                class="block text-sm font-medium text-gray-700">City</label>
+                                            <input type="text" id="city" name="city" required
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2">
+                                        </div>
+                                        <div>
+                                            <label for="province"
+                                                class="block text-sm font-medium text-gray-700">Province</label>
+                                            <input type="text" id="province" name="province" required
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2">
+                                        </div>
+                                        <div>
+                                            <label for="postal-code"
+                                                class="block text-sm font-medium text-gray-700">Postal Code</label>
+                                            <input type="text" id="postal-code" name="postal-code" required
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2">
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="mobile" class="block text-sm font-medium text-gray-700">Mobile
+                                                Number</label>
+                                            <input type="tel" id="mobile" name="mobile" required
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2">
+                                        </div>
+                                        <div>
+                                            <label for="email" class="block text-sm font-medium text-gray-700">Email
+                                                Address</label>
+                                            <input type="email" id="email" name="email" required
+                                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2">
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="notes" class="block text-sm font-medium text-gray-700">Order Notes
+                                            (Optional)</label>
+                                        <textarea id="notes" name="notes" rows="2"
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary sm:text-sm border border-gray-300 p-2"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button type="button" onclick="submitOrder()"
+                            class="inline-flex w-full justify-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-800 sm:ml-3 sm:w-auto transition-colors">Place
+                            Order</button>
+                        <button type="button" onclick="closeModal()"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto transition-colors">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <i data-lucide="leaf" class="h-6 w-6 text-primary"></i>
+                        <span class="text-xl font-bold tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Dedicated to preserving the ancient wisdom of Sri Lankan Ayurveda while delivering premium
+                        quality natural products and treatments.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-primary transition">Home</a></li>
+                        <li><a href="products.html" class="hover:text-primary transition">Our Products</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Treatments</a></li>
+                        <li><a href="doctor.html" class="hover:text-primary transition">Our Doctor</a></li>
+                        <li><a href="about.html" class="hover:text-primary transition">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Treatments</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="services.html" class="hover:text-primary transition">Shirodhara</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Steam Bath</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Varicose Treatment</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Sarwanga Ayurveda</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="h-5 w-5 mr-2 text-primary flex-shrink-0 mt-0.5"></i>
+                            <span>123 Ayurveda Lane, Colombo, Sri Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="h-5 w-5 mr-2 text-primary flex-shrink-0"></i>
+                            <span>+94 11 234 5678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="h-5 w-5 mr-2 text-primary flex-shrink-0"></i>
+                            <span>info@ranjeewaherbal.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2024 Ranjeewa Herbal. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition"><i data-lucide="facebook" class="h-4 w-4"></i></a>
+                    <a href="#" class="hover:text-white transition"><i data-lucide="instagram" class="h-4 w-4"></i></a>
+                    <a href="#" class="hover:text-white transition"><i data-lucide="twitter" class="h-4 w-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Use Lucide icons
+        lucide.createIcons();
+
+        // Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Cart Logic
+        let cart = JSON.parse(localStorage.getItem('ranjeewaCart')) || [];
+
+        // Debug: logic to populate cart with dummy data if empty for review purposes
+        // Uncomment the line below to test with data if localStorage is empty
+        if (cart.length === 0) {
+            // cart = [
+            //    { id: 1, name: 'Varicose Relief Oil', price: 1500, image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60', quantity: 1 },
+            //    { id: 2, name: 'Herbal Hair Oil', price: 1200, image: 'https://images.unsplash.com/photo-1528702748617-c64d49f918af?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60', quantity: 2 }
+            // ];
+            // localStorage.setItem('ranjeewaCart', JSON.stringify(cart));
+        }
+
+        const cartContainer = document.getElementById('cart-container');
+        const emptyCartMsg = document.getElementById('empty-cart-message');
+        const cartItemsWrapper = document.getElementById('cart-items-wrapper');
+        const subtotalEl = document.getElementById('summary-subtotal');
+        const totalEl = document.getElementById('summary-total');
+
+        function formatPrice(price) {
+            return 'LKR ' + price.toLocaleString();
+        }
+
+        function renderCart() {
+            if (cart.length === 0) {
+                cartContainer.classList.add('hidden');
+                emptyCartMsg.classList.remove('hidden');
+                emptyCartMsg.classList.add('flex', 'flex-col', 'items-center');
+            } else {
+                cartContainer.classList.remove('hidden');
+                emptyCartMsg.classList.add('hidden');
+                emptyCartMsg.classList.remove('flex');
+
+                cartItemsWrapper.innerHTML = '';
+                let subtotal = 0;
+
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex flex-col sm:flex-row items-center gap-6 py-6 border-b border-gray-100 last:border-0';
+                    itemEl.innerHTML = `
+                        <div class="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-xl overflow-hidden shadow-sm">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-center object-cover">
+                        </div>
+                        <div class="flex-1 w-full text-center sm:text-left">
+                            <h3 class="text-base font-bold text-gray-900">${item.name}</h3>
+                            <p class="mt-1 text-primary font-medium">${formatPrice(item.price)}</p>
+                            
+                            <div class="flex flex-col sm:flex-row items-center mt-4 gap-4">
+                                <div class="flex items-center border border-gray-200 rounded-full">
+                                    <button onclick="updateQuantity(${index}, -1)" class="p-2 text-gray-500 hover:text-primary transition">
+                                        <i data-lucide="minus" class="h-4 w-4"></i>
+                                    </button>
+                                    <span class="w-8 text-center text-sm font-semibold">${item.quantity}</span>
+                                    <button onclick="updateQuantity(${index}, 1)" class="p-2 text-gray-500 hover:text-primary transition">
+                                        <i data-lucide="plus" class="h-4 w-4"></i>
+                                    </button>
+                                </div>
+                                <button onclick="removeItem(${index})" class="text-sm text-red-500 hover:text-red-700 underline underline-offset-2">Remove</button>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-gray-900">${formatPrice(itemTotal)}</p>
+                        </div>
+                    `;
+                    cartItemsWrapper.appendChild(itemEl);
+                });
+
+                subtotalEl.innerText = formatPrice(subtotal);
+                totalEl.innerText = formatPrice(subtotal);
+                lucide.createIcons(); // Refresh icons for new elements
+            }
+        }
+
+        window.updateQuantity = function (index, change) {
+            if (cart[index].quantity + change > 0) {
+                cart[index].quantity += change;
+            } else {
+                // If quantity goes to 0 or below from button click, typically ask to remove or stop at 1.
+                // Here we'll stop at 1.
+                if (change < 0 && cart[index].quantity === 1) return;
+            }
+            saveAndRender();
+        };
+
+        window.removeItem = function (index) {
+            cart.splice(index, 1);
+            saveAndRender();
+        };
+
+        function saveAndRender() {
+            localStorage.setItem('ranjeewaCart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        // Payment Method Toggle
+        window.togglePaymentDetails = function (method) {
+            const bankDetails = document.getElementById('bank-details');
+            const bankRadioLines = document.getElementById('option-bank');
+            const codRadioLines = document.getElementById('option-cod');
+
+            if (method === 'bank') {
+                bankDetails.classList.remove('hidden');
+                bankRadioLines.classList.add('border-primary', 'bg-emerald-50/30');
+                codRadioLines.classList.remove('border-primary', 'bg-emerald-50/30');
+            } else {
+                bankDetails.classList.add('hidden');
+                bankRadioLines.classList.remove('border-primary', 'bg-emerald-50/30');
+                codRadioLines.classList.add('border-primary', 'bg-emerald-50/30');
+            }
+        };
+
+        window.processCheckout = function () {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            // Show Modal
+            document.getElementById('checkout-modal').classList.remove('hidden');
+            lucide.createIcons(); // Refresh icons in modal
+        };
+
+        window.closeModal = function () {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        };
+
+        window.submitOrder = function () {
+            const form = document.getElementById('checkout-form');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const province = document.getElementById('province').value;
+            const postalCode = document.getElementById('postal-code').value;
+            const mobile = document.getElementById('mobile').value;
+            const email = document.getElementById('email').value;
+            const notes = document.getElementById('notes').value;
+
+            const method = document.querySelector('input[name="payment-method"]:checked').value;
+            const methodText = method === 'bank' ? 'Bank Deposit' : 'Cash on Delivery';
+
+            // Construct Order Summary
+            let orderDetails = `New Order from ${name}!\n\n`;
+            orderDetails += `Contact: ${mobile}\nEmail: ${email}\n`;
+            orderDetails += `Address: ${address}\nCity: ${city}\nProvince: ${province}\nPostal Code: ${postalCode}\n\n`;
+            orderDetails += `Payment Method: ${methodText}\n\nItems:\n`;
+
+            cart.forEach(item => {
+                orderDetails += `- ${item.name} x ${item.quantity} (${formatPrice(item.price * item.quantity)})\n`;
+            });
+
+            orderDetails += `\nTotal: ${totalEl.innerText}`;
+            if (notes) orderDetails += `\n\nNotes: ${notes}`;
+
+            alert(`Thank you for your order, ${name}!\n\nWe have received your details. We will contact you at ${mobile} shortly to confirm your order.\n\n(In a real app, this would send an email/API request)`);
+
+            // Simulate sending order
+            console.log(orderDetails);
+
+            // Clear cart & close modal
+            cart = [];
+            saveAndRender();
+            closeModal();
+        };
+
+        // Initialize state
+        renderCart();
+
+        // Ensure the correct payment state visual is active
+        const checkedPayment = document.querySelector('input[name="payment-method"]:checked');
+        if (checkedPayment) {
+            togglePaymentDetails(checkedPayment.value);
+        }
+
+    </script>
+</body>
+
+</html>
