@@ -56,6 +56,7 @@
                     <a href="contact.html"
                         class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
                 </div>
+                <a href="cart.html" class="text-gray-700 hover:text-primary font-medium transition">Cart</a>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
                         <i data-lucide="menu" class="h-6 w-6"></i>
@@ -282,9 +283,8 @@ Crafted with powerful traditional herbs, this oil deeply penetrates hardened ski
         document.getElementById('mobile-menu-btn').addEventListener('click', () => {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
-    </script>
 
-    // Add to Cart Logic
+        // Add to Cart Logic
         function addToCart(name, price, image) {
             let cart = JSON.parse(localStorage.getItem('ranjeewaCart')) || [];
 
@@ -309,7 +309,6 @@ Crafted with powerful traditional herbs, this oil deeply penetrates hardened ski
         }
     </script>
 </body>
-
 
 </html>
 
