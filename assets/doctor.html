@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Doctor | Dr. Indrani Kariyawasam | Ranjeewa Herbal</title>
+    <meta name="description"
+        content="Meet Dr. Indrani Kariyawasam, a senior Ayurvedic consultant with 30 years of experience in Sri Lankan traditional Ayurveda, specializing in Sarwanga and Eye treatments.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#047857', // Emerald 700
+                        secondary: '#d97706', // Amber 600
+                        accent: '#f59e0b', // Amber 500
+                        dark: '#1c1917', // Stone 900
+                        light: '#fafaf9', // Stone 50
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-pattern {
+            background-color: #047857;
+            background-image: url("https://www.transparenttextures.com/patterns/leaf.png");
+        }
+
+        .smooth-scroll {
+            scroll-behavior: smooth;
+        }
+
+        /* Fade animation for feedback */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-light text-dark smooth-scroll">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-8 w-8 text-primary"></i>
+                        <span class="text-2xl font-bold text-primary tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium transition">Home</a>
+                    <a href="doctor.html" class="text-primary hover:text-secondary font-medium transition">Our
+                        Doctor</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary font-medium transition">Products</a>
+                    <a href="services.html"
+                        class="text-gray-700 hover:text-primary font-medium transition">Treatments</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition">About Us</a>
+                    <a href="contact.html"
+                        class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Home</a>
+                <a href="doctor.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-green-50">Our Doctor</a>
+                <a href="products.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Products</a>
+                <a href="services.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Treatments</a>
+                <a href="about.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About
+                    Us</a>
+                <a href="contact.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Doctor Profile Section -->
+    <div class="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+        <div class="absolute inset-0 hero-pattern opacity-5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                <!-- Profile Image -->
+                <div class="lg:col-span-5 mb-10 lg:mb-0 relative">
+                    <div
+                        class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform rotate-[-2deg] hover:rotate-0 transition duration-500">
+                        <!-- Using a high-quality Unsplash image of a senior female doctor/healer -->
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=1770&auto=format&fit=crop"
+                            alt="Dr. Indrani Kariyawasam" class="w-full h-[500px] object-cover object-top">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <p class="text-white text-lg font-serif italic">"Healing is a journey of nature."</p>
+                        </div>
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -z-10 top-10 -right-10 w-full h-full bg-emerald-100 rounded-2xl"
+                        style="transform: rotate(4deg);"></div>
+                </div>
+
+                <!-- Doctor Details -->
+                <div class="lg:col-span-7 text-left">
+                    <div
+                        class="inline-flex items-center px-4 py-2 rounded-full border border-emerald-100 bg-emerald-50 text-secondary text-sm font-bold tracking-wide uppercase mb-6">
+                        <i data-lucide="star" class="h-4 w-4 mr-2 fill-current"></i>
+                        Head Consultant
+                    </div>
+
+                    <h1 class="text-4xl tracking-tight font-bold text-gray-900 sm:text-5xl md:text-6xl mb-4">
+                        Dr. Indrani Kariyawasam
+                    </h1>
+
+                    <div class="flex items-center space-x-4 mb-8">
+                        <div class="flex items-center text-primary font-semibold">
+                            <i data-lucide="award" class="h-6 w-6 mr-2"></i>
+                            <span class="text-lg">30+ Years Experience</span>
+                        </div>
+                        <span class="text-gray-300">|</span>
+                        <div class="flex items-center text-gray-600">
+                            <i data-lucide="map-pin" class="h-5 w-5 mr-2"></i>
+                            <span>Sri Lankan Traditional Ayurveda</span>
+                        </div>
+                    </div>
+
+                    <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                        Dr. Indrani Kariyawasam is a renowned practitioner dedicated to the ancient art of Ayurveda.
+                        With over three decades of hands-on experience, she combines ancestral wisdom with compassionate
+                        care to treat complex ailments. Her deep understanding of natural herbs and holistic therapies
+                        has brought healing to countless patients.
+                    </p>
+
+                    <div class="bg-white rounded-xl p-6 shadow-md border border-gray-100 mb-8">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center">
+                            <i data-lucide="stethoscope" class="h-5 w-5 text-secondary mr-2"></i>
+                            Areas of Specialization
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-start">
+                                <i data-lucide="check-circle-2"
+                                    class="h-5 w-5 text-primary mt-0.5 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Ayurveda Sarwanga</h4>
+                                    <p class="text-sm text-gray-500">Comprehensive full-body healing treatments
+                                        including therapeutic oils and steam therapies.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i data-lucide="check-circle-2"
+                                    class="h-5 w-5 text-primary mt-0.5 mr-3 flex-shrink-0"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Eye Treatments (Akshi Roga)</h4>
+                                    <p class="text-sm text-gray-500">Specialized herbal care for vision improvement and
+                                        eye health restoration.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="contact.html"
+                            class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-primary hover:bg-emerald-800 transition shadow-lg hover:shadow-xl">
+                            Book an Consultation
+                        </a>
+                        <a href="#feedback-section"
+                            class="inline-flex items-center justify-center px-8 py-3 border border-emerald-200 text-base font-medium rounded-full text-primary bg-emerald-50 hover:bg-emerald-100 transition">
+                            Read Patient Stories
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Feedback Section -->
+    <div id="feedback-section" class="bg-gray-50 py-16 md:py-24 relative overflow-hidden">
+        <!-- Background Elements -->
+        <i data-lucide="quote"
+            class="absolute top-20 left-10 text-gray-200 h-32 w-32 opacity-50 transform -rotate-12"></i>
+        <i data-lucide="quote"
+            class="absolute bottom-20 right-10 text-gray-200 h-32 w-32 opacity-50 transform rotate-12"></i>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-base text-secondary font-semibold tracking-wide uppercase">Testimonials</h2>
+                <h3 class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl font-serif">
+                    Stories of Healing
+                </h3>
+            </div>
+
+            <div
+                class="bg-white rounded-3xl shadow-xl p-8 md:p-12 relative min-h-[300px] flex flex-col justify-center items-center text-center transition-all duration-300 border border-gray-100">
+                <!-- Testimonial Content Container -->
+                <div id="testimonial-container" class="max-w-2xl mx-auto">
+                    <!-- Dynamic Content will be inserted here -->
+                </div>
+
+                <!-- Progress Indicators -->
+                <div class="flex justify-center space-x-2 mt-8" id="dots-container">
+                    <!-- Dynamic dots -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="index.html" class="flex items-center space-x-2 mb-4">
+                        <i data-lucide="leaf" class="h-6 w-6 text-primary"></i>
+                        <span class="text-xl font-bold tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Dedicated to preserving the ancient wisdom of Sri Lankan Ayurveda while delivering premium
+                        quality natural products and treatments.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="index.html" class="hover:text-primary transition">Home</a></li>
+                        <li><a href="doctor.html" class="hover:text-primary transition">Our Doctor</a></li>
+                        <li><a href="products.html" class="hover:text-primary transition">Our Products</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Treatments</a></li>
+                        <li><a href="about.html" class="hover:text-primary transition">About Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Treatments</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="services.html" class="hover:text-primary transition">Shirodhara</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Steam Bath</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Varicose Treatment</a></li>
+                        <li><a href="services.html" class="hover:text-primary transition">Sarwanga Ayurveda</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-gray-200">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start">
+                            <i data-lucide="map-pin" class="h-5 w-5 mr-2 text-primary flex-shrink-0 mt-0.5"></i>
+                            <span>123 Ayurveda Lane, Colombo, Sri Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="phone" class="h-5 w-5 mr-2 text-primary flex-shrink-0"></i>
+                            <span>+94 11 234 5678</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i data-lucide="mail" class="h-5 w-5 mr-2 text-primary flex-shrink-0"></i>
+                            <span>info@ranjeewaherbal.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2024 Ranjeewa Herbal. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition"><i data-lucide="facebook" class="h-4 w-4"></i></a>
+                    <a href="#" class="hover:text-white transition"><i data-lucide="instagram" class="h-4 w-4"></i></a>
+                    <a href="#" class="hover:text-white transition"><i data-lucide="twitter" class="h-4 w-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Navbar Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 10) {
+                navbar.classList.add('shadow-md');
+                navbar.classList.remove('py-2');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Testimonial Shuffler Logic
+        const testimonials = [
+            {
+                text: "I suffered from severe migraines for years. Dr. Indrani's treatment was life-changing. Her oil gave me relief in just two days.",
+                author: "Kumari Perera",
+                location: "Colombo"
+            },
+            {
+                text: "Dr. Indrani's eye treatment is exceptional. My vision clarity has improved significantly after her traditional Akshi Roga therapy.",
+                author: "Sanjeewa Silva",
+                location: "Gampaha"
+            },
+            {
+                text: "The Sarwanga treatment was so relaxing. I felt rejuvenated. Her 30 years of experience truly shows in her diagnosis and care.",
+                author: "Ms. Elizabeth Clarke",
+                location: "United Kingdom"
+            },
+            {
+                text: "I visited for varicose vein treatment. The herbal oils she prescribed worked wonders where western medicine failed.",
+                author: "Nimali Rathnayake",
+                location: "Kandy"
+            },
+            {
+                text: "A truly holistic healing experience. Dr. Indrani takes the time to understand the root cause. Highly recommended!",
+                author: "Mohamed Riaz",
+                location: "Galle"
+            }
+        ];
+
+        let currentIndex = 0;
+        const container = document.getElementById('testimonial-container');
+        const dotsContainer = document.getElementById('dots-container');
+        const ROTATE_INTERVAL = 5000; // 5 seconds
+
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            testimonials.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.className = `w-3 h-3 rounded-full transition-all duration-300 ${index === currentIndex ? 'bg-primary scale-125' : 'bg-gray-300 hover:bg-gray-400'}`;
+                dot.onclick = () => showTestimonial(index);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function showTestimonial(index) {
+            currentIndex = index;
+
+            // Fade out
+            container.style.opacity = '0';
+
+            setTimeout(() => {
+                const t = testimonials[currentIndex];
+                container.innerHTML = `
+                    <div class="mb-6">
+                        <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-emerald-100 text-primary mb-4">
+                            <i data-lucide="message-circle" class="h-6 w-6"></i>
+                        </div>
+                    </div>
+                    <p class="text-xl md:text-2xl font-serif text-gray-700 italic mb-8 leading-relaxed">
+                        "${t.text}"
+                    </p>
+                    <div>
+                        <h4 class="font-bold text-gray-900">${t.author}</h4>
+                        <p class="text-sm text-gray-500">${t.location}</p>
+                    </div>
+                `;
+
+                // Re-init generic icons (message-circle) inside the injected HTML
+                lucide.createIcons();
+
+                // Update dots
+                renderDots();
+
+                // Fade in
+                container.style.opacity = '1';
+                container.classList.add('fade-in');
+                setTimeout(() => container.classList.remove('fade-in'), 800);
+            }, 300); // Wait for fade out
+        }
+
+        // Initialize
+        renderDots();
+        showTestimonial(0);
+
+        // Auto Shuffle
+        setInterval(() => {
+            let nextIndex = (currentIndex + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        }, ROTATE_INTERVAL);
+
+    </script>
+</body>
+
+</html>
