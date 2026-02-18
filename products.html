@@ -283,10 +283,36 @@ Crafted with powerful traditional herbs, this oil deeply penetrates hardened ski
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
     </script>
+
+    // Add to Cart Logic
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('ranjeewaCart')) || [];
+
+            // Check if item already exists
+            const existingItemIndex = cart.findIndex(item => item.name === name);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem('ranjeewaCart', JSON.stringify(cart));
+
+            // Redirect to cart
+            window.location.href = 'cart.html';
+        }
+    </script>
 </body>
 
 
 </html>
+
 
 
 
