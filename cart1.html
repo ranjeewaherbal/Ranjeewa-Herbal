@@ -176,9 +176,9 @@
                                     <div id="bank-details"
                                         class="hidden mt-2 text-sm text-gray-600 bg-gray-50 p-2 rounded">
                                         Bank: Sampath Bank<br>
-                                        Acc No: 1234-5678-9012<br>
+                                        Acc No: 1035140280<br>
                                         Name: Ranjeewa Herbal<br>
-                                        Branch: Colombo
+                                        Branch: Galle Super
                                     </div>
                                 </div>
                             </label>
@@ -237,9 +237,13 @@
                 </button>
             </div>
 
-            <form id="checkout-form" class="px-8 py-6 space-y-6">
+            <form id="checkout-form" action="https://formspree.io/f/mojnlbkl"
+      method="POST"
+      class="px-8 py-6 space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="space-y-2">
+                        <input type="hidden" name="_subject" value="New Order - Ranjeewa Herbal">
+    <input type="hidden" name="_captcha" value="false">
                         <label class="text-sm font-medium text-gray-700">Full Name</label>
                         <input type="text" name="fullName" required
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
@@ -548,5 +552,6 @@
 
     </script>
 </body>
+
 
 </html>
