@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Ranjeewa Herbal</title>
+    <meta name="description" content="View your selected Ayurveda products and proceed to secure checkout.">
+
+    <!-- Tailwind CSS with Custom Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#047857', // Emerald 700
+                        secondary: '#d97706', // Amber 600
+                        accent: '#f59e0b', // Amber 500
+                        dark: '#1c1917', // Stone 900
+                        light: '#fafaf9', // Stone 50
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.5.28/dist/jspdf.plugin.autotable.js"></script>
+
+    <style>
+        /* Custom Styles for smooth transitions */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .modal:not(.hidden) {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+
+<body class="bg-light text-dark font-sans flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-8 w-8 text-primary"></i>
+                        <span class="text-2xl font-bold text-primary tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium transition">Home</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary font-medium transition">Products</a>
+                    <a href="services.html"
+                        class="text-gray-700 hover:text-primary font-medium transition">Treatments</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition">About Us</a>
+                    <a href="cart.html" class="text-primary font-medium transition flex items-center">
+                        <i data-lucide="shopping-cart" class="h-5 w-5 mr-1"></i> Cart
+                    </a>
+                    <a href="contact.html"
+                        class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">Home</a>
+                <a href="products.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary">Products</a>
+                <a href="cart.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-emerald-50">Cart</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="flex-grow pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <h1
+            class="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-8 text-center md:text-left border-b border-emerald-100 pb-4">
+            Your Shopping Cart
+        </h1>
+
+        <div id="cart-container" class="grid grid-cols-1 lg:grid-cols-3 gap-12 fade-in">
+            <!-- Cart Items Section -->
+            <div class="lg:col-span-2">
+                <div id="cart-items" class="space-y-6">
+                    <!-- Items will be injected here by JS -->
+                    <div class="text-center py-12 bg-white rounded-xl border border-gray-100 shadow-sm">
+                        <i data-lucide="shopping-basket" class="h-16 w-16 text-gray-300 mx-auto mb-4"></i>
+                        <p class="text-gray-500 text-lg">Your cart is currently empty.</p>
+                        <a href="products.html"
+                            class="mt-4 inline-block text-primary font-medium hover:underline">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Summary & Checkout Section -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 sticky top-32">
+                    <h2 class="text-xl font-bold text-gray-900 mb-6 font-serif">Order Summary</h2>
+
+                    <div class="space-y-4 mb-6 pb-6 border-b border-gray-100">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Subtotal</span>
+                            <span id="subtotal-price">LKR 0.00</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Tax (0% for Herbs)</span>
+                            <span>LKR 0.00</span>
+                        </div>
+                        <div class="flex justify-between text-xl font-bold text-gray-900 pt-2">
+                            <span>Total</span>
+                            <span id="total-price" class="text-primary">LKR 0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Options -->
+                    <div class="mb-8">
+                        <h3 class="font-semibold text-gray-900 mb-3">Payment Method</h3>
+                        <div class="space-y-3">
+                            <label
+                                class="flex items-start p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-emerald-50 transition peer-checked:border-primary">
+                                <input type="radio" name="payment" value="bank"
+                                    class="mt-1 text-primary focus:ring-primary h-4 w-4">
+                                <div class="ml-3">
+                                    <span class="block font-medium text-gray-900">Bank Deposit</span>
+                                    <div id="bank-details"
+                                        class="hidden mt-2 text-sm text-gray-600 bg-gray-50 p-2 rounded">
+                                        Bank: Sampath Bank<br>
+                                        Acc No: 1234-5678-9012<br>
+                                        Name: Ranjeewa Herbal<br>
+                                        Branch: Colombo
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label
+                                class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-emerald-50 transition">
+                                <input type="radio" name="payment" value="cod"
+                                    class="text-primary focus:ring-primary h-4 w-4" checked>
+                                <span class="ml-3 font-medium text-gray-900">Cash on Delivery (COD)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button id="checkout-btn"
+                        class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:bg-emerald-800 hover:shadow-xl transition transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed">
+                        Proceed to Checkout
+                    </button>
+
+                    <a href="products.html"
+                        class="block text-center mt-4 text-sm text-gray-500 hover:text-primary transition">
+                        <i data-lucide="arrow-left" class="inline h-3 w-3 mr-1"></i> Continue Shopping
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (Consistent with other pages) -->
+    <footer class="bg-dark text-white pt-16 pb-8 border-t border-gray-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <i data-lucide="leaf" class="h-6 w-6 text-primary"></i>
+                        <span class="text-xl font-bold tracking-tight">Ranjeewa Herbal</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-2">© 2024. All rights reserved.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+                    <a href="products.html" class="text-gray-400 hover:text-white transition">Products</a>
+                    <a href="contact.html" class="text-gray-400 hover:text-white transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal"
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm hidden modal">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto m-4">
+            <div class="sticky top-0 bg-white px-8 py-5 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="text-2xl font-serif font-bold text-gray-900">Checkout Details</h3>
+                <button id="close-modal" class="text-gray-400 hover:text-red-500 transition">
+                    <i data-lucide="x" class="h-6 w-6"></i>
+                </button>
+            </div>
+
+            <form id="checkout-form" class="px-8 py-6 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700">Full Name</label>
+                        <input type="text" name="fullName" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700">Mobile Number</label>
+                        <input type="tel" name="mobile" required pattern="[0-9]{10}" placeholder="07XXXXXXXX"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" name="email" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700">Address Line 1</label>
+                    <input type="text" name="address" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700">City</label>
+                        <input type="text" name="city" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700">Province</label>
+                        <input type="text" name="province" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium text-gray-700">Postal Code</label>
+                        <input type="text" name="postalCode" required
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-sm font-medium text-gray-700">Order Notes (Optional)</label>
+                    <textarea name="notes" rows="3"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition"></textarea>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100">
+                    <button type="submit"
+                        class="w-full bg-primary text-white font-bold py-3 rounded-xl shadow-md hover:bg-emerald-800 transition transform hover:scale-[1.02]">
+                        Confirm Order
+                    </button>
+                    <p class="text-xs text-center text-gray-500 mt-3">
+                        By clicking confirm, you agree to our Terms of Service. An invoice will be generated
+                        automatically.
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Init Icons
+        lucide.createIcons();
+
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cart State Management
+        let cart = JSON.parse(localStorage.getItem('ranjeewaCart')) || [];
+        const cartItemsContainer = document.getElementById('cart-items');
+        const subtotalEl = document.getElementById('subtotal-price');
+        const totalEl = document.getElementById('total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+
+        // Formats currency
+        function formatPrice(price) {
+            return 'LKR ' + price.toLocaleString();
+        }
+
+        // Render Cart
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12 bg-white rounded-xl border border-gray-100 shadow-sm">
+                        <i data-lucide="shopping-basket" class="h-16 w-16 text-gray-300 mx-auto mb-4"></i>
+                        <p class="text-gray-500 text-lg">Your cart is currently empty.</p>
+                        <a href="products.html" class="mt-4 inline-block text-primary font-medium hover:underline">Continue Shopping</a>
+                    </div>`;
+                checkoutBtn.disabled = true;
+                subtotalEl.textContent = formatPrice(0);
+                totalEl.textContent = formatPrice(0);
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const itemHTML = `
+                    <div class="flex flex-col sm:flex-row items-center bg-white p-4 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                        <!-- Image -->
+                        <div class="w-full sm:w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
+                        </div>
+                        
+                        <!-- Details -->
+                        <div class="flex-1 w-full sm:ml-6 mt-4 sm:mt-0 text-center sm:text-left">
+                            <h3 class="text-lg font-bold text-gray-900">${item.name}</h3>
+                            <p class="text-primary font-medium">${formatPrice(item.price)}</p>
+                        </div>
+
+                        <!-- Quantity Actions -->
+                        <div class="flex items-center mt-4 sm:mt-0 bg-gray-50 rounded-lg p-1">
+                            <button onclick="updateQuantity(${index}, -1)" class="p-2 text-gray-500 hover:text-secondary hover:bg-white rounded-md transition">
+                                <i data-lucide="minus" class="h-4 w-4"></i>
+                            </button>
+                            <span class="w-12 text-center font-semibold text-gray-900">${item.quantity}</span>
+                            <button onclick="updateQuantity(${index}, 1)" class="p-2 text-gray-500 hover:text-secondary hover:bg-white rounded-md transition">
+                                <i data-lucide="plus" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+
+                        <!-- Total & Remove -->
+                        <div class="w-full sm:w-auto mt-4 sm:mt-0 sm:ml-8 flex justify-between sm:block items-center">
+                            <p class="font-bold text-gray-900 sm:text-right block mb-0 sm:mb-2">${formatPrice(itemTotal)}</p>
+                            <button onclick="removeItem(${index})" class="text-red-400 hover:text-red-600 transition p-2 hover:bg-red-50 rounded-full sm:float-right">
+                                <i data-lucide="trash-2" class="h-5 w-5"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+            });
+
+            subtotalEl.textContent = formatPrice(subtotal);
+            totalEl.textContent = formatPrice(subtotal); // Tax is 0 currently
+            lucide.createIcons();
+        }
+
+        // Actions
+        window.updateQuantity = function (index, change) {
+            if (cart[index].quantity + change > 0) {
+                cart[index].quantity += change;
+                saveAndRender();
+            } else {
+                // Confirm remove?
+                if (confirm('Remove this item?')) {
+                    removeItem(index);
+                }
+            }
+        };
+
+        window.removeItem = function (index) {
+            cart.splice(index, 1);
+            saveAndRender();
+        };
+
+        function saveAndRender() {
+            localStorage.setItem('ranjeewaCart', JSON.stringify(cart));
+            renderCart();
+        }
+
+        // Payment Method Toggle
+        const paymentRadios = document.querySelectorAll('input[name="payment"]');
+        const bankDetails = document.getElementById('bank-details');
+
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.value === 'bank') {
+                    bankDetails.classList.remove('hidden');
+                } else {
+                    bankDetails.classList.add('hidden');
+                }
+            });
+        });
+
+        // Checkout Modal Logic
+        const modal = document.getElementById('checkout-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const checkoutForm = document.getElementById('checkout-form');
+
+        checkoutBtn.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+
+        // Close on clean click outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+
+        // Handle Form Submission
+        checkoutForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Gather Data
+            const formData = new FormData(checkoutForm);
+            const customer = Object.fromEntries(formData.entries());
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value === 'bank' ? 'Bank Deposit' : 'Cash on Delivery';
+            const total = totalEl.textContent;
+
+            // 1. Generate Invoice PDF
+            generateInvoice(customer, cart, total, paymentMethod);
+
+            // 2. Simulate Email (Console only for client-side)
+            console.log("Email Simulation: Order details sent to " + customer.email);
+            console.log("Order Data:", { customer, cart, paymentMethod, total });
+
+            // 3. Clear Cart & Success
+            localStorage.removeItem('ranjeewaCart');
+            cart = [];
+            renderCart();
+            modal.classList.add('hidden');
+
+            // Show success message
+            alert(`Order Placed Successfully!\n\nThank you, ${customer.fullName}.\nYour invoice has been downloaded.\nA confirmation email has been sent to ${customer.email}.`);
+
+            // Redirect Home
+            window.location.href = 'index.html';
+        });
+
+        // PDF Generation
+        function generateInvoice(customer, cartItems, totalAmount, paymentMethod) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Header
+            doc.setFillColor(4, 120, 87); // Primary Green
+            doc.rect(0, 0, 210, 40, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(22);
+            doc.setFont("helvetica", "bold");
+            doc.text("INVOICE", 105, 18, { align: "center" });
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.text("Ranjeewa Herbal", 105, 28, { align: "center" });
+
+            // Customer Details
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+            doc.text(`Bill To: ${customer.fullName}`, 14, 55);
+            doc.setFontSize(10);
+            doc.text(customer.address, 14, 60);
+            doc.text(`${customer.city}, ${customer.province}`, 14, 65);
+            doc.text(`Phone: ${customer.mobile}`, 14, 70);
+
+            // Order Info
+            const date = new Date().toLocaleDateString();
+            doc.text(`Date: ${date}`, 150, 55);
+            doc.text(`Payment: ${paymentMethod}`, 150, 60);
+            doc.text(`Order ID: #${Math.floor(Math.random() * 10000)}`, 150, 65);
+
+            // Table
+            const tableColumn = ["Product", "Price", "Qty", "Total"];
+            const tableRows = [];
+
+            cartItems.forEach(item => {
+                const itemData = [
+                    item.name,
+                    formatPrice(item.price),
+                    item.quantity,
+                    formatPrice(item.price * item.quantity)
+                ];
+                tableRows.push(itemData);
+            });
+
+            doc.autoTable({
+                head: [tableColumn],
+                body: tableRows,
+                startY: 80,
+                theme: 'grid',
+                headStyles: { fillColor: [4, 120, 87] }, // Green header
+            });
+
+            // Total
+            const finalY = doc.lastAutoTable.finalY || 80;
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text(`Grand Total: ${totalAmount}`, 140, finalY + 15);
+
+            // Footer
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "italic");
+            doc.text("Thank you for choosing nature's healing!", 105, 280, { align: "center" });
+
+            doc.save("Ranjeewa_Invoice.pdf");
+        }
+
+        // Initial Render
+        renderCart();
+
+    </script>
+</body>
+
+</html>
