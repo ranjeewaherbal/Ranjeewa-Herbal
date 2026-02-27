@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Portal | Ranjeewa Herbal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#047857',
+                        secondary: '#065f46',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .hidden-section {
+            display: none !important;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #printable-payslip,
+            #printable-payslip * {
+                visibility: visible;
+            }
+
+            #printable-payslip {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                border: none;
+                box-shadow: none;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="text-gray-800 h-screen overflow-hidden flex">
+
+    <!-- Notification Toast -->
+    <div id="toast"
+        class="fixed top-5 right-5 z-50 transform transition-all duration-300 translate-x-full opacity-0 bg-white border-l-4 border-primary shadow-lg rounded p-4 flex items-center gap-3">
+        <i data-lucide="check-circle" class="text-primary"></i>
+        <span id="toast-message" class="font-medium text-gray-700"></span>
+    </div>
+
+    <!-- ================= LOGIN SECTION ================= -->
+    <div id="login-section" class="w-full flex items-center justify-center bg-gray-100 absolute inset-0 z-40 relative">
+        <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
+            <div class="text-center">
+                <div class="mx-auto h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="users" class="h-8 w-8 text-primary"></i>
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900">HR Portal Login</h2>
+                <p class="mt-2 text-sm text-gray-600">Enter your credentials to access the portal</p>
+            </div>
+            <form class="mt-8 space-y-6" onsubmit="handleLogin(event)">
+                <div class="rounded-md shadow-sm space-y-4">
+                    <div>
+                        <label for="login-username" class="block text-sm font-medium text-gray-700">Username</label>
+                        <input id="login-username" name="username" type="text" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input id="login-password" name="password" type="password" required
+                            class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit"
+                        class="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition shadow-md hover:shadow-lg">
+                        Sign In
+                    </button>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="#" onclick="toggleAuthView('register')"
+                        class="font-medium text-primary hover:text-secondary text-sm">Need an account? Register here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= REGISTER SECTION ================= -->
+    <div id="register-section"
+        class="w-full flex items-center justify-center bg-gray-100 absolute inset-0 z-40 hidden-section">
+        <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
+            <div class="text-center">
+                <div class="mx-auto h-16 w-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                    <i data-lucide="user-plus" class="h-8 w-8 text-primary"></i>
+                </div>
+                <h2 class="text-3xl font-extrabold text-gray-900">Create Account</h2>
+                <p class="mt-2 text-sm text-gray-600">Register as HR Admin or Employee</p>
+            </div>
+            <form class="mt-8 space-y-4" onsubmit="handleRegister(event)">
+                <div>
+                    <label for="reg-role" class="block text-sm font-medium text-gray-700">Role</label>
+                    <select id="reg-role" onchange="toggleRegEmpSelect()"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm bg-white">
+                        <option value="hr">HR Admin</option>
+                        <option value="employee">Employee</option>
+                    </select>
+                </div>
+                <div id="reg-emp-num-container" class="hidden-section">
+                    <label for="reg-emp-num" class="block text-sm font-medium text-gray-700">Employee Number</label>
+                    <select id="reg-emp-num"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm bg-white">
+                        <!-- Populated via JS -->
+                    </select>
+                </div>
+                <div>
+                    <label for="reg-username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input id="reg-username" type="text" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                </div>
+                <div>
+                    <label for="reg-password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input id="reg-password" type="password" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-primary focus:border-primary sm:text-sm">
+                </div>
+                <div class="pt-2">
+                    <button type="submit"
+                        class="w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-secondary transition shadow-md">
+                        Register
+                    </button>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="#" onclick="toggleAuthView('login')"
+                        class="font-medium text-primary hover:text-secondary text-sm">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ================= DASHBOARD SECTION ================= -->
+    <div id="dashboard-section" class="w-full flex h-full hidden-section">
+
+        <!-- Sidebar -->
+        <div class="w-64 bg-slate-900 text-white flex flex-col shadow-xl z-20">
+            <div class="h-20 flex items-center px-6 bg-slate-950 border-b border-slate-800">
+                <i data-lucide="leaf" class="h-8 w-8 text-emerald-400 mr-2"></i>
+                <span class="text-xl font-bold tracking-tight text-white">Ranjeewa HR</span>
+            </div>
+            <nav class="flex-1 px-4 py-6 space-y-2 relative" id="sidebar-nav">
+
+                <a href="#" onclick="switchTab('payroll')" id="nav-payroll"
+                    class="nav-btn flex items-center gap-3 px-4 py-3 bg-emerald-600 text-white rounded-xl transition shadow-md">
+                    <i data-lucide="file-spreadsheet" class="w-5 h-5"></i>
+                    <span class="font-medium">Payroll System</span>
+                </a>
+
+                <a href="#" onclick="switchTab('leave')" id="nav-leave"
+                    class="nav-btn flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition">
+                    <i data-lucide="calendar-days" class="w-5 h-5"></i>
+                    <span class="font-medium">Leave Management</span>
+                </a>
+            </nav>
+            <div class="p-4 border-t border-slate-800">
+                <div class="flex items-center gap-3 mb-4 px-2">
+                    <div
+                        class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold border border-emerald-500/30">
+                        <i data-lucide="user" class="w-5 h-5"></i>
+                    </div>
+                    <div class="flex-col flex">
+                        <span id="display-user-name" class="text-sm font-semibold truncate max-w-[120px]">User</span>
+                        <span id="display-user-role" class="text-xs text-slate-400">Role</span>
+                    </div>
+                </div>
+                <button onclick="handleLogout()"
+                    class="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-800 hover:bg-red-500/20 text-slate-300 hover:text-red-400 rounded-lg transition border border-transparent hover:border-red-500/30">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    <span class="text-sm font-medium">Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col h-full bg-gray-50 overflow-hidden relative">
+
+            <!-- Topbar -->
+            <header
+                class="h-20 bg-white shadow-sm border-b border-gray-200 px-8 flex justify-between items-center shrink-0 z-10">
+                <h1 id="page-title" class="text-2xl font-bold text-gray-800">Payroll Management</h1>
+                <div class="text-sm text-gray-500 font-medium" id="current-date-display"></div>
+            </header>
+
+            <!-- Scrollable Content -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto p-8 relative">
+
+                <!-- ================= PAYROLL TAB ================= -->
+                <div id="tab-payroll" class="max-w-5xl mx-auto space-y-6">
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-6 flex items-center"><i
+                                data-lucide="calculator" class="w-5 h-5 mr-2 text-primary"></i> Generate Paysheet</h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <!-- Employee Select -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Employee Number</label>
+                                <select id="pay-emp-num"
+                                    class="w-full border-gray-300 rounded-lg shadow-sm focus:border-primary focus:ring-primary border p-2.5 bg-gray-50">
+                                    <option value="" disabled selected>Select Employee</option>
+                                    <!-- Populated via JS -->
+                                </select>
+                            </div>
+                            <!-- Date Month Year -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Select Month & Year</label>
+                                <input type="month" id="pay-month-year"
+                                    class="w-full border-gray-300 rounded-lg shadow-sm focus:border-primary focus:ring-primary border p-2 bg-gray-50">
+                            </div>
+                            <!-- Account Number -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Account Number</label>
+                                <input type="text" id="pay-acc-num" placeholder="e.g. 1000293847"
+                                    class="w-full border-gray-300 rounded-lg shadow-sm focus:border-primary focus:ring-primary border p-2 bg-gray-50">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Earnings -->
+                            <div class="space-y-4">
+                                <h3
+                                    class="text-sm font-semibold text-emerald-700 uppercase tracking-wider border-b pb-2">
+                                    Earnings</h3>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Basic Salary (LKR)</label>
+                                    <input type="number" id="pay-basic" placeholder="0.00"
+                                        class="w-full border-gray-300 rounded-lg border p-2"
+                                        oninput="calculatePayroll()">
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Allowances (LKR)</label>
+                                    <input type="number" id="pay-allowance" placeholder="0.00"
+                                        class="w-full border-gray-300 rounded-lg border p-2"
+                                        oninput="calculatePayroll()">
+                                </div>
+                            </div>
+
+                            <!-- Deductions -->
+                            <div class="space-y-4">
+                                <h3 class="text-sm font-semibold text-red-700 uppercase tracking-wider border-b pb-2">
+                                    Deductions</h3>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">Other Deductions (LKR)</label>
+                                    <input type="number" id="pay-deductions" placeholder="0.00"
+                                        class="w-full border-gray-300 rounded-lg border p-2"
+                                        oninput="calculatePayroll()">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">EPF (8%) <span
+                                                class="text-xs text-gray-400">Auto</span></label>
+                                        <input type="number" id="pay-epf" readonly
+                                            class="w-full bg-gray-100 border-gray-200 text-gray-500 rounded-lg border p-2 cursor-not-allowed">
+                                    </div>
+                                    <div>
+                                        <!-- Note: ETF is typically paid by employer (3%), but let's show it in portal as requested -->
+                                        <label class="block text-sm text-gray-600 mb-1">ETF (3%) <span
+                                                class="text-xs text-gray-400">Employer</span></label>
+                                        <input type="number" id="pay-etf" readonly
+                                            class="w-full bg-gray-100 border-gray-200 text-gray-500 rounded-lg border p-2 cursor-not-allowed">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div
+                            class="mt-8 bg-gray-50 p-6 rounded-xl border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Gross Salary (Basic + Allowances)</p>
+                                <p class="text-xl font-bold text-gray-800">LKR <span id="pay-gross">0.00</span></p>
+                            </div>
+                            <div class="hidden md:block w-px h-12 bg-gray-300"></div>
+                            <div>
+                                <p class="text-sm text-gray-500 mb-1">Total Deductions (EPF + Other)</p>
+                                <p class="text-xl font-bold text-red-600">LKR <span id="pay-total-deduct">0.00</span>
+                                </p>
+                            </div>
+                            <div class="hidden md:block w-px h-12 bg-gray-300"></div>
+                            <div class="text-right">
+                                <p class="text-sm font-semibold text-primary mb-1 uppercase tracking-wider">Net Salary
+                                </p>
+                                <p class="text-3xl font-extrabold text-primary">LKR <span id="pay-net">0.00</span></p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-end gap-3 border-t pt-6">
+                            <button onclick="clearPayroll()"
+                                class="px-5 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition">Clear</button>
+                            <button onclick="generatePayslip()"
+                                class="px-5 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition shadow-md flex items-center gap-2">
+                                <i data-lucide="printer" class="w-4 h-4"></i> Generate & Print Paysheet
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- Printable Area (Hidden normally, shown in print) -->
+                    <div id="printable-payslip"
+                        class="hidden-section bg-white p-10 border border-gray-200 shadow-lg rounded-xl max-w-3xl mx-auto my-8">
+                        <div class="text-center border-b-2 border-gray-800 pb-6 mb-6">
+                            <h1 class="text-2xl font-bold text-gray-900 uppercase tracking-widest">Ranjeewa Herbal</h1>
+                            <p class="text-sm text-gray-600 mt-1">123 Ayurveda Lane, Colombo, Sri Lanka</p>
+                            <h2
+                                class="text-xl font-bold text-gray-800 mt-4 border border-gray-300 inline-block px-6 py-2 rounded">
+                                PAYSLIP</h2>
+                        </div>
+
+                        <div class="flex justify-between mb-8 text-sm">
+                            <div class="space-y-2">
+                                <p><span class="font-bold w-32 inline-block">Employee No:</span> <span
+                                        id="print-emp-num" class="text-gray-800"></span></p>
+                                <p><span class="font-bold w-32 inline-block">Account No:</span> <span id="print-acc-num"
+                                        class="text-gray-800"></span></p>
+                            </div>
+                            <div class="space-y-2 text-right">
+                                <p><span class="font-bold">Salary Month:</span> <span id="print-month"></span></p>
+                                <p><span class="font-bold">Printed On:</span> <span id="print-date"></span></p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-8 mb-8 text-sm">
+                            <!-- Left: Earnings -->
+                            <div>
+                                <div
+                                    class="bg-gray-100 p-2 font-bold text-gray-800 border border-gray-300 flex justify-between">
+                                    <span>Earnings</span> <span>Amount (LKR)</span>
+                                </div>
+                                <div class="border-x border-b border-gray-300 p-2 flex justify-between">
+                                    <span>Basic Salary</span> <span id="print-basic">0.00</span>
+                                </div>
+                                <div class="border-x border-b border-gray-300 p-2 flex justify-between">
+                                    <span>Allowances</span> <span id="print-allowance">0.00</span>
+                                </div>
+                                <div
+                                    class="border-x border-b border-gray-300 p-2 flex justify-between font-bold bg-gray-50">
+                                    <span>Gross Salary</span> <span id="print-gross">0.00</span>
+                                </div>
+                            </div>
+
+                            <!-- Right: Deductions -->
+                            <div>
+                                <div
+                                    class="bg-gray-100 p-2 font-bold text-gray-800 border border-gray-300 flex justify-between">
+                                    <span>Deductions</span> <span>Amount (LKR)</span>
+                                </div>
+                                <div class="border-x border-b border-gray-300 p-2 flex justify-between text-red-600">
+                                    <span>EPF (8%)</span> <span id="print-epf">0.00</span>
+                                </div>
+                                <div class="border-x border-b border-gray-300 p-2 flex justify-between text-red-600">
+                                    <span>Other Deductions</span> <span id="print-deductions">0.00</span>
+                                </div>
+                                <div
+                                    class="border-x border-b border-gray-300 p-2 flex justify-between font-bold bg-gray-50 text-red-700">
+                                    <span>Total Deductions</span> <span id="print-total-deduct">0.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ETF Info & Net Pay -->
+                        <div class="flex flex-col items-end mb-8 border-t-2 border-gray-800 pt-6">
+                            <div
+                                class="w-1/2 flex justify-between items-center bg-emerald-50 p-4 border border-emerald-200 rounded-lg">
+                                <span class="font-bold text-lg text-emerald-900">NET PAY</span>
+                                <span class="font-bold text-2xl text-primary" id="print-net">LKR 0.00</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-3">* Employer ETF Contribution (3%): LKR <span
+                                    id="print-etf">0.00</span></p>
+                        </div>
+
+                        <div class="flex justify-between mt-16 pt-8 border-t border-gray-300">
+                            <div class="text-center w-48">
+                                <div class="border-b border-gray-400 mb-2 h-4"></div>
+                                <span class="text-xs text-gray-600 font-bold uppercase">Employer Signature</span>
+                            </div>
+                            <div class="text-center w-48">
+                                <div class="border-b border-gray-400 mb-2 h-4"></div>
+                                <span class="text-xs text-gray-600 font-bold uppercase">Employee Signature</span>
+                            </div>
+                        </div>
+                        <div class="no-print text-center mt-6">
+                            <button onclick="window.print()"
+                                class="px-6 py-2 bg-gray-800 text-white rounded hover:bg-black font-medium"><i
+                                    data-lucide="printer" class="inline w-4 h-4 mr-2"></i>Print Payslip
+                                Document</button>
+                            <button onclick="closePrintView()"
+                                class="px-6 py-2 ml-4 border border-gray-300 rounded hover:bg-gray-100 font-medium">Cancel</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ================= LEAVE TAB ================= -->
+                <div id="tab-leave" class="max-w-4xl mx-auto space-y-6 hidden-section">
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6 border-b pb-4 flex items-center">
+                            <i data-lucide="calendar-plus" class="w-6 h-6 mr-2 text-primary"></i> Apply for Leave
+                        </h2>
+
+                        <form onsubmit="handleLeaveApply(event)" class="space-y-6">
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Employee Number</label>
+                                    <select id="leave-emp-num" required
+                                        class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary p-2.5 bg-gray-50">
+                                        <option value="" disabled selected>Select Employee</option>
+                                        <!-- Populated via JS -->
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Leave Type</label>
+                                    <select id="leave-type" required
+                                        class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary p-2.5 bg-gray-50">
+                                        <option value="Casual Leave">Casual Leave</option>
+                                        <option value="Sick Leave">Sick Leave</option>
+                                        <option value="Annual Leave">Annual Leave</option>
+                                        <option value="Unpaid Leave">Unpaid Leave</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-xl border border-gray-200 bg-gray-50/50">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1 flex items-center"><i
+                                            data-lucide="calendar" class="w-4 h-4 mr-1 text-gray-500"></i> Start
+                                        Date</label>
+                                    <input type="date" id="leave-start" required
+                                        class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary p-2.5">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1 flex items-center"><i
+                                            data-lucide="calendar" class="w-4 h-4 mr-1 text-gray-500"></i> End
+                                        Date</label>
+                                    <input type="date" id="leave-end" required
+                                        class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary p-2.5">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Reason for Leave</label>
+                                <textarea id="leave-reason" rows="3" required
+                                    placeholder="Briefly explain the reason..."
+                                    class="w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary p-3"></textarea>
+                            </div>
+
+                            <div class="pt-4 border-t border-gray-100 flex justify-end">
+                                <button type="submit"
+                                    class="px-6 py-3 bg-primary text-white font-medium rounded-lg hover:bg-secondary transition shadow-md flex items-center group">
+                                    <i data-lucide="send"
+                                        class="w-4 h-4 mr-2 group-hover:translate-x-1 transition-transform"></i> Submit
+                                    Application
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Leave History Preview -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mt-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Recent Applications</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-600 text-sm uppercase tracking-wider">
+                                        <th class="p-3 border-b">Employee</th>
+                                        <th class="p-3 border-b">Type</th>
+                                        <th class="p-3 border-b">Duration</th>
+                                        <th class="p-3 border-b">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leave-history-table" class="text-sm">
+                                    <!-- Dynamic Rows -->
+                                    <tr>
+                                        <td colspan="4" class="p-4 text-center text-gray-500 italic">No leave
+                                            applications found.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Constants 
+        const EMPLOYEES = Array.from({ length: 12 }, (_, i) => `EMPRH${i + 1}`);
+        let currentUser = null; // { username: '', role: '', empNum: '' }
+
+        // Mock Leave Data
+        let leaveApplications = [];
+
+        // DOM Elements
+        const loginSection = document.getElementById('login-section');
+        const registerSection = document.getElementById('register-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const tabs = {
+            payroll: document.getElementById('tab-payroll'),
+            leave: document.getElementById('tab-leave')
+        };
+        const navBtns = {
+            payroll: document.getElementById('nav-payroll'),
+            leave: document.getElementById('nav-leave')
+        };
+        const pageTitle = document.getElementById('page-title');
+
+        // Populate Selects
+        function populateEmployeeSelects() {
+            const selects = ['reg-emp-num', 'pay-emp-num', 'leave-emp-num'];
+            selects.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                // clear old options except first disabled
+                while (el.options.length > 1) el.remove(1);
+                // if it's reg, clear all
+                if (id === 'reg-emp-num') el.innerHTML = '';
+
+                EMPLOYEES.forEach(emp => {
+                    const opt = document.createElement('option');
+                    opt.value = emp;
+                    opt.textContent = emp;
+                    el.appendChild(opt);
+                });
+            });
+        }
+
+        // On Load
+        document.addEventListener('DOMContentLoaded', () => {
+            populateEmployeeSelects();
+            document.getElementById('current-date-display').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            // Set default month/year for payroll
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            document.getElementById('pay-month-year').value = `${yyyy}-${mm}`;
+        });
+
+        // UI Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 3000);
+        }
+
+        // ---------- AUTHENTICATION ---------- //
+        function toggleAuthView(view) {
+            if (view === 'register') {
+                loginSection.classList.add('hidden-section');
+                registerSection.classList.remove('hidden-section');
+            } else {
+                registerSection.classList.add('hidden-section');
+                loginSection.classList.remove('hidden-section');
+            }
+        }
+
+        function toggleRegEmpSelect() {
+            const role = document.getElementById('reg-role').value;
+            const container = document.getElementById('reg-emp-num-container');
+            if (role === 'employee') {
+                container.classList.remove('hidden-section');
+            } else {
+                container.classList.add('hidden-section');
+            }
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            // In a real app, this goes to backend. For now, mock it and redirect to login.
+            showToast('Account registered successfully! Please login.');
+            e.target.reset();
+            toggleAuthView('login');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const un = document.getElementById('login-username').value;
+
+            // Allow login to access dashboard. We assign a mock role.
+            let r = un.toLowerCase().includes('admin') || un.toLowerCase().includes('hr') ? 'hr' : 'employee';
+
+            currentUser = { username: un, role: r, empNum: r === 'employee' ? 'EMPRH1' : 'HR-Admin' };
+
+            // Setup Dashboard View based on role
+            document.getElementById('display-user-name').textContent = currentUser.username;
+            document.getElementById('display-user-role').textContent = r === 'hr' ? 'HR Administrator' : 'Staff Employee';
+
+            if (r === 'employee') {
+                // Employees only see leave
+                navBtns.payroll.classList.add('hidden-section');
+                switchTab('leave');
+            } else {
+                // HR sees all
+                navBtns.payroll.classList.remove('hidden-section');
+                switchTab('payroll');
+            }
+
+            loginSection.classList.add('hidden-section');
+            registerSection.classList.add('hidden-section');
+            dashboardSection.classList.remove('hidden-section');
+
+            e.target.reset();
+            showToast(`Welcome back, ${un}!`);
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            dashboardSection.classList.add('hidden-section');
+            loginSection.classList.remove('hidden-section');
+
+            // clear form
+            document.getElementById('login-username').value = '';
+            document.getElementById('login-password').value = '';
+        }
+
+        // ---------- NAVIGATION ---------- //
+        function switchTab(tabId) {
+            // Hide all
+            Object.values(tabs).forEach(t => t.classList.add('hidden-section'));
+            // Reset styles
+            navBtns.payroll.className = "nav-btn flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition";
+            navBtns.leave.className = "nav-btn flex items-center gap-3 px-4 py-3 text-slate-300 hover:bg-slate-800 hover:text-white rounded-xl transition";
+
+            // Show Active
+            tabs[tabId].classList.remove('hidden-section');
+            navBtns[tabId].className = "nav-btn flex items-center gap-3 px-4 py-3 bg-emerald-600 text-white rounded-xl transition shadow-md";
+
+            pageTitle.textContent = tabId === 'payroll' ? 'Payroll Management' : 'Leave Administration';
+
+            // Close print view if switching tabs
+            document.getElementById('printable-payslip').classList.add('hidden-section');
+        }
+
+        // ---------- PAYROLL LOGIC ---------- //
+        function calculatePayroll() {
+            const basic = parseFloat(document.getElementById('pay-basic').value) || 0;
+            const allow = parseFloat(document.getElementById('pay-allowance').value) || 0;
+            const deduct = parseFloat(document.getElementById('pay-deductions').value) || 0;
+
+            const gross = basic + allow;
+
+            // EPF is 8% of Basic Salary for Employee Deduction
+            const epf = basic * 0.08;
+
+            // ETF is 3% of Basic Salary (Paid by employer, doesn't come out of net pay, but shown for records)
+            const etf = basic * 0.03;
+
+            const totalDeduct = epf + deduct;
+            const net = gross - totalDeduct;
+
+            // Update UI
+            document.getElementById('pay-epf').value = epf.toFixed(2);
+            document.getElementById('pay-etf').value = etf.toFixed(2);
+
+            document.getElementById('pay-gross').textContent = gross.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById('pay-total-deduct').textContent = totalDeduct.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById('pay-net').textContent = net.toLocaleString('en-US', { minimumFractionDigits: 2 });
+        }
+
+        function clearPayroll() {
+            document.getElementById('pay-emp-num').value = "";
+            document.getElementById('pay-acc-num').value = "";
+            document.getElementById('pay-basic').value = "";
+            document.getElementById('pay-allowance').value = "";
+            document.getElementById('pay-deductions').value = "";
+            calculatePayroll();
+        }
+
+        function generatePayslip() {
+            const empNum = document.getElementById('pay-emp-num').value;
+            const accNum = document.getElementById('pay-acc-num').value;
+            const monthYear = document.getElementById('pay-month-year').value;
+            const basic = document.getElementById('pay-basic').value;
+
+            if (!empNum || !monthYear || basic === "") {
+                alert("Please fill in Employee Number, Month/Year, and Basic Salary.");
+                return;
+            }
+
+            // Map data to printable area
+            document.getElementById('print-emp-num').textContent = empNum;
+            document.getElementById('print-acc-num').textContent = accNum || 'Not Provided';
+            document.getElementById('print-month').textContent = monthYear;
+            document.getElementById('print-date').textContent = new Date().toLocaleDateString();
+
+            document.getElementById('print-basic').textContent = parseFloat(basic).toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById('print-allowance').textContent = parseFloat(document.getElementById('pay-allowance').value || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById('print-gross').textContent = document.getElementById('pay-gross').textContent;
+
+            document.getElementById('print-epf').textContent = document.getElementById('pay-epf').value;
+            document.getElementById('print-deductions').textContent = parseFloat(document.getElementById('pay-deductions').value || 0).toLocaleString('en-US', { minimumFractionDigits: 2 });
+            document.getElementById('print-total-deduct').textContent = document.getElementById('pay-total-deduct').textContent;
+
+            document.getElementById('print-etf').textContent = document.getElementById('pay-etf').value;
+            document.getElementById('print-net').textContent = `LKR ${document.getElementById('pay-net').textContent}`;
+
+            // Show modal and print
+            document.getElementById('printable-payslip').classList.remove('hidden-section');
+
+            // Little delay to ensure DOM is ready before print dialog
+            setTimeout(() => {
+                window.print();
+            }, 100);
+        }
+
+        function closePrintView() {
+            document.getElementById('printable-payslip').classList.add('hidden-section');
+        }
+
+        // ---------- LEAVE LOGIC ---------- //
+        function handleLeaveApply(e) {
+            e.preventDefault();
+            const empNum = document.getElementById('leave-emp-num').value;
+            const type = document.getElementById('leave-type').value;
+            const start = document.getElementById('leave-start').value;
+            const end = document.getElementById('leave-end').value;
+
+            if (new Date(start) > new Date(end)) {
+                alert("End date cannot be before start date!");
+                return;
+            }
+
+            const application = {
+                emp: empNum,
+                type: type,
+                duration: `${start} to ${end}`,
+                status: 'Pending'
+            };
+
+            leaveApplications.unshift(application);
+            updateLeaveTable();
+
+            e.target.reset();
+            showToast("Leave application submitted for approval!");
+        }
+
+        function updateLeaveTable() {
+            const tb = document.getElementById('leave-history-table');
+            tb.innerHTML = '';
+
+            if (leaveApplications.length === 0) {
+                tb.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500 italic">No leave applications found.</td></tr>`;
+                return;
+            }
+
+            leaveApplications.forEach(app => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-gray-100 hover:bg-gray-50";
+                tr.innerHTML = `
+                    <td class="p-3 font-medium text-gray-800">${app.emp}</td>
+                    <td class="p-3 text-gray-600">${app.type}</td>
+                    <td class="p-3 text-gray-600">${app.duration}</td>
+                    <td class="p-3"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-semibold">${app.status}</span></td>
+                `;
+                tb.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+
+</html>
