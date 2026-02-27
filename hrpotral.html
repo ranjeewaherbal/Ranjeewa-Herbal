@@ -58,7 +58,53 @@
         }
     </style>
 </head>
-
+<!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <img src="assets/logo.png" alt="Ranjeewa Herbal Logo" class="h-8 w-auto">
+                        <span class="text-2xl font-bold text-primary tracking-tight">Ranjeewa Herbal</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium transition">Home</a>
+                    <a href="products.html" class="text-gray-700 hover:text-primary font-medium transition">Products</a>
+                    <a href="services.html"
+                        class="text-gray-700 hover:text-primary font-medium transition">Treatments</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition">About Us</a>
+                    <a href="doctor.html" class="text-primary hover:text-secondary font-medium transition">Doctor</a>
+                    <a href="contact.html"
+                        class="px-5 py-2.5 rounded-full bg-primary text-white font-medium hover:bg-emerald-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Contact</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-primary focus:outline-none">
+                        <i data-lucide="menu" class="h-6 w-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Home</a>
+                <a href="products.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Products</a>
+                <a href="services.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Treatments</a>
+                <a href="about.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">About
+                    Us</a>
+                <a href="doctor.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-primary bg-green-50">Doctor</a>
+                <a href="contact.html"
+                    class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Contact</a>
+            </div>
+        </div>
+    </nav>
 <body class="text-gray-800 h-screen overflow-hidden flex">
 
     <!-- Notification Toast -->
@@ -796,5 +842,6 @@
         }
     </script>
 </body>
+
 
 </html>
